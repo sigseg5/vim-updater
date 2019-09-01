@@ -14,6 +14,10 @@ USER_FOLDER = path.expanduser("~")
 UPDATER_DIR = "/.vim_updater"
 VIM_FOLDER = "/vim"
 
+if OS_TYPE == "win32":
+    print("Windows don't support yet")
+    sys_exit(666)
+
 print("""
     VIM updater version: {updater_version}
     OS: {os_type}
