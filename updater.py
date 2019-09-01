@@ -6,7 +6,7 @@ from src.Utilities.os_checker import check_os
 from src.Utilities.git_checker import check_git_on_device
 from src.Utilities.git_downloader import openBrowser
 
-UPDATER_VER = "0.0.0"
+UPDATER_VER = "0.0.1"
 OS_TYPE = check_os()
 GIT_STATUS = check_git_on_device()
 GIT_DOWNLOAD_PAGE = "http://git-scm.com/"
