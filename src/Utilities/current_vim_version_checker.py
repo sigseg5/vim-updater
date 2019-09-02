@@ -1,4 +1,3 @@
-from os import system
 import subprocess
 
 
