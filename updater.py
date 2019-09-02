@@ -5,6 +5,8 @@ from os import mkdir
 from src.Utilities.os_checker import check_os
 from src.Utilities.git_checker import check_git_on_device
 from src.Utilities.git_downloader import openBrowser
+from src.Utilities.current_vim_version_checker import check_current_vim_version_in_system
+from src.Utilities.current_vim_version_checker import check_current_vim_version_in_src_folder
 
 UPDATER_VER = "0.0.1"
 OS_TYPE = check_os()
@@ -27,6 +29,7 @@ print("""
            git_status=GIT_STATUS))
 
 if str(GIT_STATUS).count("git version") != 1:
+    print("git not found")
     openBrowser(GIT_DOWNLOAD_PAGE)
     sys_exit(0)
 
@@ -55,3 +58,6 @@ elif path.isdir(USER_FOLDER) and not path.exists(USER_FOLDER + UPDATER_DIR):
 else:
     print("error with user folder: {user_folder}".format(user_folder=USER_FOLDER))
     sys_exit(1)
+
+# print(check_current_vim_version_in_system())
+check_current_vim_version_in_src_folder(USER_FOLDER + UPDATER_DIR + VIM_FOLDER)
