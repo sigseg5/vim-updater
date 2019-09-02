@@ -34,7 +34,7 @@ if path.isdir(USER_FOLDER) and path.exists(USER_FOLDER + UPDATER_DIR):
     print("work folder and updater dir here, check vim src folder")
     if path.exists(USER_FOLDER + UPDATER_DIR + VIM_FOLDER):
         print("vim folder here")
-        print("cd vim & start git clone")
+        print("cd vim & output vim version in system & start pull")
     else:
         print("start git clone")
 
