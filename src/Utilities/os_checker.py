@@ -2,7 +2,7 @@ from sys import platform
 
 
 def check_os():
-    # BUG?: platform == "linux2" - true on macOS
+    # TODO: FIX BUG: platform == "linux2" - true on macOS
     if platform == "linux":
         return "linux"
     elif platform == "darwin":
