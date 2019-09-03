@@ -18,7 +18,6 @@ def check_current_vim_version_in_system():
 
 
 def check_current_vim_version_in_src_folder(path_to_vim_folder):
-    included_patches_flag = False
     print("current vim version in src folder")
     # TODO: add 'not' to statement
     # if path.isdir(path_to_vim_folder, flag):
@@ -27,16 +26,16 @@ def check_current_vim_version_in_src_folder(path_to_vim_folder):
 
     included_patch_output = ""
     try:
+        first_version_in_file_flag = False
         with open(path_to_vim_folder + "/src/version.c", "r") as src_version:
             for line in src_version:
-                if "static int included_patches[]" in line:
-                    included_patches_flag = True
-                    if included_patches_flag:
+                if line.find("static int included_patches[]") != -1:
+                    first_version_in_file_flag = True
+                if first_version_in_file_flag:
+                    if line.find(",") != -1:
+                        first_version_in_file_flag = False
                         included_patch_output += line
-                        if "," in line:
-                            included_patches_flag = False
+        return included_patch_output.strip().strip(",")
     except FileNotFoundError:
         print("error")
         sys_exit(1)
-
-    print(included_patch_output)
