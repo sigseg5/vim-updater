@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 from sys import exit as sys_exit
 from os import path
 from os import mkdir
@@ -59,5 +61,5 @@ else:
     print("error with user folder: {user_folder}".format(user_folder=USER_FOLDER))
     sys_exit(1)
 
-# print(check_current_vim_version_in_system())
-check_current_vim_version_in_src_folder(USER_FOLDER + UPDATER_DIR + VIM_FOLDER)
+print(check_current_vim_version_in_system())
+print(check_current_vim_version_in_src_folder(USER_FOLDER + UPDATER_DIR + VIM_FOLDER))
