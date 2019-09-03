@@ -10,7 +10,8 @@
 1. `git clone https://github.com/kirillNK/vim-updater.git`
 or download sources [here](https://github.com/kirillNK/vim-updater/archive/master.zip)
 2. `cd vim-updater`
-3. `\.updater.py`
+3. `chmod +x updater.py`
+4. `/.updater.py`
 
 ### Contribute
 Any ideas or trouble? Please open [issue](https://github.com/kirillNK/vim-updater/issues) 
