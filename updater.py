@@ -9,6 +9,7 @@ from src.Utilities.git_checker import check_git_on_device
 from src.Utilities.git_downloader_from_internet import openBrowser
 from src.Utilities.current_vim_version_checker import check_current_vim_version_in_system
 from src.Utilities.current_vim_version_checker import check_current_vim_version_in_src
+from src.Utilities.git_utilities import git_action
 
 UPDATER_VER = "0.0.1"
 OS_TYPE = check_os()
@@ -71,3 +72,5 @@ else:
 
 print(check_current_vim_version_in_system())
 print(check_current_vim_version_in_src(USER_FOLDER + UPDATER_DIR + VIM_FOLDER))
+
+git_action("clone")
