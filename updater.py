@@ -8,11 +8,18 @@ from src.Utilities.os_checker import check_os
 from src.Utilities.git_checker import check_git_on_device
 from src.Utilities.git_downloader import openBrowser
 from src.Utilities.current_vim_version_checker import check_current_vim_version_in_system
-from src.Utilities.current_vim_version_checker import check_current_vim_version_in_src_folder
+from src.Utilities.current_vim_version_checker import check_current_vim_version_in_src
 
 UPDATER_VER = "0.0.1"
 OS_TYPE = check_os()
-GIT_STATUS = check_git_on_device()
+
+try:
+    GIT_STATUS = check_git_on_device()
+except Exception:
+    # TODO: Add correct exception for Windows
+    print("can't find git")
+    sys_exit(1)
+
 GIT_DOWNLOAD_PAGE = "http://git-scm.com/"
 USER_FOLDER = path.expanduser("~")
 UPDATER_DIR = "/.vim_updater"
@@ -62,4 +69,4 @@ else:
     sys_exit(1)
 
 print(check_current_vim_version_in_system())
-print(check_current_vim_version_in_src_folder(USER_FOLDER + UPDATER_DIR + VIM_FOLDER))
+print(check_current_vim_version_in_src(USER_FOLDER + UPDATER_DIR + VIM_FOLDER))
