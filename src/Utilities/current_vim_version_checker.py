@@ -2,6 +2,7 @@ import subprocess
 from os import path
 from sys import exit as sys_exit
 
+
 # TODO: add try except
 
 
@@ -20,8 +21,10 @@ def check_current_vim_version_in_system():
 
 
 def check_current_vim_version_in_src(path_to_vim_folder):
-    # TODO: add 'not' to statement
-    # if path.isdir(path_to_vim_folder):
+    # try to create dictionary in future
+
+    complete_version = ""
+
     if not path.isdir(path_to_vim_folder):
         sys_exit(1)
 
@@ -32,12 +35,13 @@ def check_current_vim_version_in_src(path_to_vim_folder):
             first_minor_in_text_flag = False
             for line in make_file:
                 if not first_minor_in_text_flag:
+                    # fixme not safe solution
                     if line.find("MAJOR") != -1:
                         major_and_minor_version += line
                     if line.find("MINOR") != -1:
                         major_and_minor_version += line
                         first_minor_in_text_flag = True
-            print(major_and_minor_version)
+            complete_version += major_and_minor_version
     except FileNotFoundError:
         print("error")
         sys_exit(1)
@@ -54,7 +58,8 @@ def check_current_vim_version_in_src(path_to_vim_folder):
                     if line.find(",") != -1:
                         first_version_in_file_flag = False
                         included_patches += line
-        return included_patches.strip().strip(",")
+        complete_version += "Included patches: " + included_patches.strip().strip(",")
     except FileNotFoundError:
         print("error")
         sys_exit(1)
+    return complete_version
