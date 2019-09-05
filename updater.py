@@ -13,11 +13,12 @@ from src.Utilities.current_vim_version_checker import check_current_vim_version_
 UPDATER_VER = "0.0.1"
 OS_TYPE = check_os()
 
+# fixme: UnicodeDecodeError on windows. Temp solution with try-except
+# 'utf-8' codec can't decode byte 0xad in pos 6: invalid start byte
 try:
     GIT_STATUS = check_git_on_device()
-except Exception:
-    # TODO: Add correct exception for Windows
-    print("can't find git")
+except UnicodeDecodeError:
+    print("unicode decode error")
     sys_exit(1)
 
 GIT_DOWNLOAD_PAGE = "http://git-scm.com/"
