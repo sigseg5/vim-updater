@@ -6,7 +6,7 @@ from os import mkdir
 
 from src.Utilities.os_checker import check_os
 from src.Utilities.git_checker import check_git_on_device
-from src.Utilities.git_downloader import openBrowser
+from src.Utilities.git_downloader_from_internet import openBrowser
 from src.Utilities.current_vim_version_checker import check_current_vim_version_in_system
 from src.Utilities.current_vim_version_checker import check_current_vim_version_in_src
 
