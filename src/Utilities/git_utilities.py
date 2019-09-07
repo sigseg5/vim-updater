@@ -3,7 +3,7 @@ import subprocess
 # can only clone and pull from github repo
 
 
-def consoleOutputParse(*args):
+def git_action(*args):
     """
     :param args: git command: clone or pull
     If command == pull: you need pass command and repo link to args
@@ -17,32 +17,21 @@ def consoleOutputParse(*args):
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
         for line in proc.stdout:
-            print("".join(map(bytes.decode, line)))
+            # fixme: can't encode bytes
+            # print("".join(map(bytes.decode, line)))
+            print(line)
 
-    elif len(args) == 2 and args[0] == "clone":
-        print("git clone {repo}".format(repo=args[1]))
-        command = "git {cmd} {repo}".format(cmd=args[0], repo=args[1])
+    elif len(args) == 3 and args[0] == "clone":
+        print("git clone {repo} {path}".format(repo=args[1], path=args[2]))
+        command = "git {cmd} {repo} {path}".format(cmd=args[0], repo=args[1], path=args[2])
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
         for line in proc.stdout:
-            print("".join(map(bytes.decode, line)))
+            # fixme: can't encode bytes
+            # print("".join(map(bytes.decode, line)))
+            print(line)
     else:
         print("trouble with args")
         sys_exit(1)
 
     pass
-
-
-def git_action(command):
-    # VIM_REPO = "https://github.com/vim/vim.git"
-    VIM_REPO = "https://github.com/kirillNK/webpack-template.git"
-    if command == "clone":
-        print("clone")
-        # TODO: add progress output
-        print(consoleOutputParse(command, VIM_REPO))
-    elif command == "pull":
-        print("pull")
-        print(consoleOutputParse(command, VIM_REPO))
-    else:
-        print("command error")
-        sys_exit(1)
