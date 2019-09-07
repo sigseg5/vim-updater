@@ -11,25 +11,27 @@ def git_action(*args):
     :return:
     """
 
-    if len(args) == 1 and args[0] == "pull":
+    if len(args) == 2 and args[0] == "pull":
         print("git pull")
         command = "git {cmd}".format(cmd=args[0])
-        proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, cwd=args[1])
 
         for line in proc.stdout:
             # fixme: can't encode bytes
-            # print("".join(map(bytes.decode, line)))
-            print(line)
+            print(proc.stdout.read(150).strip())
+            # print("".join(map(bytes.decode(), line)))
+            # print(line.strip())
 
     elif len(args) == 3 and args[0] == "clone":
         print("git clone {repo} {path}".format(repo=args[1], path=args[2]))
         command = "git {cmd} {repo} {path}".format(cmd=args[0], repo=args[1], path=args[2])
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
-        for line in proc.stdout:
-            # fixme: can't encode bytes
-            # print("".join(map(bytes.decode, line)))
-            print(line)
+        # for line in proc.stdout:
+        #     # fixme: can't encode bytes
+        #     print("".join(map(bytes.decode, line)))
+        #     print(line.strip())
+        print(proc.stdout.read(150).strip())
     else:
         print("trouble with args")
         sys_exit(1)
