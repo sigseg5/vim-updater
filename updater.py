@@ -51,9 +51,14 @@ if path.isdir(USER_FOLDER) and path.exists(USER_FOLDER + UPDATER_DIR):
     print("work folder and updater dir here, check vim src folder")
     if path.exists(USER_FOLDER + UPDATER_DIR + VIM_FOLDER):
         print("vim folder here")
+        print(check_current_vim_version_in_system())
         print("cd vim & output vim version in system & start pull")
+        print("pulling")
+        print(check_current_vim_version_in_src(USER_FOLDER + UPDATER_DIR + VIM_FOLDER))
+
     else:
         git_action("clone", VIM_REPO, USER_FOLDER + UPDATER_DIR)
+        print(check_current_vim_version_in_src(USER_FOLDER + UPDATER_DIR + VIM_FOLDER))
 
 elif path.isdir(USER_FOLDER) and not path.exists(USER_FOLDER + UPDATER_DIR):
     print("can't find work folder")
@@ -69,10 +74,8 @@ elif path.isdir(USER_FOLDER) and not path.exists(USER_FOLDER + UPDATER_DIR):
 
     print("start git clone")
     git_action("clone", VIM_REPO, USER_FOLDER + UPDATER_DIR)
+    print(check_current_vim_version_in_src(USER_FOLDER + UPDATER_DIR + VIM_FOLDER))
 
 else:
     print("error with user folder: {user_folder}".format(user_folder=USER_FOLDER))
     sys_exit(1)
-
-print(check_current_vim_version_in_system())
-print(check_current_vim_version_in_src(USER_FOLDER + UPDATER_DIR + VIM_FOLDER))
