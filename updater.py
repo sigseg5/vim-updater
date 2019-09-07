@@ -27,6 +27,9 @@ USER_FOLDER = path.expanduser("~")
 UPDATER_DIR = "/.vim_updater"
 VIM_FOLDER = "/vim"
 
+# VIM_REPO = "https://github.com/vim/vim.git"
+VIM_REPO = "https://github.com/kirillNK/webpack-template.git"
+
 if OS_TYPE == "win32":
     print("Windows don't support yet")
     sys_exit(666)
@@ -50,7 +53,7 @@ if path.isdir(USER_FOLDER) and path.exists(USER_FOLDER + UPDATER_DIR):
         print("vim folder here")
         print("cd vim & output vim version in system & start pull")
     else:
-        print("start git clone")
+        git_action("clone", VIM_REPO, USER_FOLDER + UPDATER_DIR)
 
 elif path.isdir(USER_FOLDER) and not path.exists(USER_FOLDER + UPDATER_DIR):
     print("can't find work folder")
@@ -65,6 +68,7 @@ elif path.isdir(USER_FOLDER) and not path.exists(USER_FOLDER + UPDATER_DIR):
         sys_exit(1)
 
     print("start git clone")
+    git_action("clone", VIM_REPO, USER_FOLDER + UPDATER_DIR)
 
 else:
     print("error with user folder: {user_folder}".format(user_folder=USER_FOLDER))
@@ -72,5 +76,3 @@ else:
 
 print(check_current_vim_version_in_system())
 print(check_current_vim_version_in_src(USER_FOLDER + UPDATER_DIR + VIM_FOLDER))
-
-git_action("clone")
