@@ -27,8 +27,8 @@ USER_FOLDER = path.expanduser("~")
 UPDATER_DIR = "/.vim_updater"
 VIM_FOLDER = "/vim"
 
-# VIM_REPO = "https://github.com/vim/vim.git"
-VIM_REPO = "https://github.com/kirillNK/webpack-template.git"
+VIM_REPO = "https://github.com/vim/vim.git"
+# VIM_REPO = "https://github.com/kirillNK/webpack-template.git"
 
 if OS_TYPE == "win32":
     print("Windows don't support yet")
@@ -49,16 +49,20 @@ if str(GIT_STATUS).count("git version") != 1:
 
 if path.isdir(USER_FOLDER) and path.exists(USER_FOLDER + UPDATER_DIR):
     print("work folder and updater dir here, check vim src folder")
+    # fixme
     if path.exists(USER_FOLDER + UPDATER_DIR + VIM_FOLDER):
         print("vim folder here")
         print(check_current_vim_version_in_system())
         print("cd vim & output vim version in system & start pull")
         print("pulling")
+        git_action("pull", USER_FOLDER + UPDATER_DIR + VIM_FOLDER)
         print(check_current_vim_version_in_src(USER_FOLDER + UPDATER_DIR + VIM_FOLDER))
-
     else:
-        git_action("clone", VIM_REPO, USER_FOLDER + UPDATER_DIR)
-        print(check_current_vim_version_in_src(USER_FOLDER + UPDATER_DIR + VIM_FOLDER))
+        print("something wrong")
+
+    # else:
+    #     git_action("clone", VIM_REPO, USER_FOLDER + UPDATER_DIR)
+    #     print(check_current_vim_version_in_src(USER_FOLDER + UPDATER_DIR + VIM_FOLDER))
 
 elif path.isdir(USER_FOLDER) and not path.exists(USER_FOLDER + UPDATER_DIR):
     print("can't find work folder")
