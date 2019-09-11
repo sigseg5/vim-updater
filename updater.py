@@ -28,7 +28,6 @@ UPDATER_DIR = "/.vim_updater"
 VIM_FOLDER = "/vim"
 
 VIM_REPO = "https://github.com/vim/vim.git"
-# VIM_REPO = "https://github.com/kirillNK/webpack-template.git"
 
 if OS_TYPE == "win32":
     print("Windows don't support yet")

@@ -17,25 +17,21 @@ def git_action(*args):
         print("git pull")
         command = "git {cmd}".format(cmd=args[0])
         reset_command = "git reset --hard"
+
         _ = subprocess.Popen(reset_command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, cwd=args[1])
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, cwd=args[1])
 
-        print(proc.stdout.read(350).strip())
-        # for line in proc.stdout:
         # fixme: can't encode bytes
-        # print(proc.stdout.read(150).strip())
-        # print("".join(map(bytes.decode(), line)))
-        # print(line.strip())
+        # print("".join(map(bytes.decode, proc.stdout.read(350).strip())))
+        print(proc.stdout.read(350).strip())
 
     elif len(args) == 3 and args[0] == "clone":
         print("git clone {repo} {path}".format(repo=args[1], path=args[2]))
         command = "git {cmd} {repo} {path}".format(cmd=args[0], repo=args[1], path=args[2])
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 
-        # for line in proc.stdout:
-        #     # fixme: can't encode bytes
-        #     print("".join(map(bytes.decode, line)))
-        #     print(line.strip())
+        # fixme: can't encode bytes
+        # print("".join(map(bytes.decode, proc.stdout.read(350).strip())))
         print(proc.stdout.read(350).strip())
     else:
         print("trouble with args")
