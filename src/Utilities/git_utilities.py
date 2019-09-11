@@ -1,5 +1,7 @@
 from sys import exit as sys_exit
 import subprocess
+
+
 # can only clone and pull from github repo
 
 
@@ -16,11 +18,12 @@ def git_action(*args):
         command = "git {cmd}".format(cmd=args[0])
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, cwd=args[1])
 
-        for line in proc.stdout:
-            # fixme: can't encode bytes
-            print(proc.stdout.read(150).strip())
-            # print("".join(map(bytes.decode(), line)))
-            # print(line.strip())
+        print(proc.stdout.read(350).strip())
+        # for line in proc.stdout:
+        # fixme: can't encode bytes
+        # print(proc.stdout.read(150).strip())
+        # print("".join(map(bytes.decode(), line)))
+        # print(line.strip())
 
     elif len(args) == 3 and args[0] == "clone":
         print("git clone {repo} {path}".format(repo=args[1], path=args[2]))
@@ -31,7 +34,7 @@ def git_action(*args):
         #     # fixme: can't encode bytes
         #     print("".join(map(bytes.decode, line)))
         #     print(line.strip())
-        print(proc.stdout.read(150).strip())
+        print(proc.stdout.read(350).strip())
     else:
         print("trouble with args")
         sys_exit(1)

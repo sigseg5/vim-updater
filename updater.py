@@ -50,19 +50,17 @@ if str(GIT_STATUS).count("git version") != 1:
 if path.isdir(USER_FOLDER) and path.exists(USER_FOLDER + UPDATER_DIR):
     print("work folder and updater dir here, check vim src folder")
     # fixme
-    if path.exists(USER_FOLDER + UPDATER_DIR + VIM_FOLDER):
+    if path.exists(USER_FOLDER + UPDATER_DIR):
         print("vim folder here")
         print(check_current_vim_version_in_system())
         print("cd vim & output vim version in system & start pull")
         print("pulling")
-        git_action("pull", USER_FOLDER + UPDATER_DIR + VIM_FOLDER)
-        print(check_current_vim_version_in_src(USER_FOLDER + UPDATER_DIR + VIM_FOLDER))
-    else:
-        print("something wrong")
+        git_action("pull", USER_FOLDER + UPDATER_DIR)
+        print(check_current_vim_version_in_src(USER_FOLDER + UPDATER_DIR))
 
-    # else:
-    #     git_action("clone", VIM_REPO, USER_FOLDER + UPDATER_DIR)
-    #     print(check_current_vim_version_in_src(USER_FOLDER + UPDATER_DIR + VIM_FOLDER))
+    else:
+        git_action("clone", VIM_REPO, USER_FOLDER + UPDATER_DIR)
+        print(check_current_vim_version_in_src(USER_FOLDER + UPDATER_DIR + VIM_FOLDER))
 
 elif path.isdir(USER_FOLDER) and not path.exists(USER_FOLDER + UPDATER_DIR):
     print("can't find work folder")
