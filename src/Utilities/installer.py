@@ -18,10 +18,7 @@ def make_action(*args):
         #
         print(clean_proc.stdout.read(350).strip().decode("utf-8"))
 
-        # TODO: make distclean if Starting make in the src directory.
-        #  If there are problems, cd to the src directory and run
-        #  make there cd src && /Library/Developer/CommandLineTools/
-        #  usr/bin/make first
+        # fixme: SIGVTALRM signal
 
         # make_command = "make"
         # make_proc = subprocess.Popen(make_command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, cwd=args[1])
