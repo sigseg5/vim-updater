@@ -8,11 +8,18 @@ def make_action(*args):
 
     if len(args) == 2 and args[0] == "make":
         print("just make")
+
+        # TODO: make distclean if Starting make in the src directory.
+        #  If there are problems, cd to the src directory and run
+        #  make there cd src && /Library/Developer/CommandLineTools/
+        #  usr/bin/make first
+
         command = "make"
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, cwd=args[1])
 
     elif len(args) == 4 and args[0] == "sudo" and args[1] == "make" and args[2] == "install":
         print("make install")
+        # TODO: add getpass
         command = "sudo make install"
         proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, cwd=args[3])
 
