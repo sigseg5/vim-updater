@@ -10,9 +10,14 @@ from src.Utilities.git_downloader_from_internet import openBrowser
 from src.Utilities.current_vim_version_checker import check_current_vim_version_in_system
 from src.Utilities.current_vim_version_checker import check_current_vim_version_in_src
 from src.Utilities.git_utilities import git_action
+from src.Utilities.installer import make_action
+from src.Utilities.installer import make_install_action
 
 UPDATER_VER = "0.0.1"
 OS_TYPE = check_os()
+
+# make_action()
+# sys_exit(666)
 
 # fixme: UnicodeDecodeError on windows. Temp solution with try-except
 # 'utf-8' codec can't decode byte 0xad in pos 6: invalid start byte
@@ -24,6 +29,7 @@ except UnicodeDecodeError:
 
 GIT_DOWNLOAD_PAGE = "http://git-scm.com/"
 USER_FOLDER = path.expanduser("~")
+# fixme: UPDATER_DIR = "/.vim_updater/vim" on linux machine
 UPDATER_DIR = "/.vim_updater"
 VIM_FOLDER = "/vim"
 
@@ -48,7 +54,6 @@ if str(GIT_STATUS).count("git version") != 1:
 
 if path.isdir(USER_FOLDER) and path.exists(USER_FOLDER + UPDATER_DIR):
     print("work folder and updater dir here, check vim src folder")
-    # fixme
     if path.exists(USER_FOLDER + UPDATER_DIR):
         print("vim folder here")
         print(check_current_vim_version_in_system())
