@@ -11,13 +11,10 @@ from src.Utilities.current_vim_version_checker import check_current_vim_version_
 from src.Utilities.current_vim_version_checker import check_current_vim_version_in_src
 from src.Utilities.git_utilities import git_action
 from src.Utilities.installer import make_action
-from src.Utilities.installer import make_install_action
 
 UPDATER_VER = "0.0.1"
 OS_TYPE = check_os()
 
-# make_action()
-# sys_exit(666)
 
 # fixme: UnicodeDecodeError on windows. Temp solution with try-except
 # 'utf-8' codec can't decode byte 0xad in pos 6: invalid start byte
@@ -34,6 +31,9 @@ UPDATER_DIR = "/.vim_updater"
 VIM_FOLDER = "/vim"
 
 VIM_REPO = "https://github.com/vim/vim.git"
+
+# make_action("make", USER_FOLDER + UPDATER_DIR)
+# sys_exit(666)
 
 if OS_TYPE == "win32":
     print("Windows don't support yet")
@@ -59,8 +59,9 @@ if path.isdir(USER_FOLDER) and path.exists(USER_FOLDER + UPDATER_DIR):
         print(check_current_vim_version_in_system())
         print("cd vim & output vim version in system & start pull")
         print("pulling")
-        git_action("pull", USER_FOLDER + UPDATER_DIR)
+        # git_action("pull", USER_FOLDER + UPDATER_DIR)
         print(check_current_vim_version_in_src(USER_FOLDER + UPDATER_DIR))
+        make_action("make", USER_FOLDER + UPDATER_DIR)
 
     else:
         git_action("clone", VIM_REPO, USER_FOLDER + UPDATER_DIR)

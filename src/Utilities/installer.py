@@ -7,7 +7,7 @@ def make_action(*args):
     # TODO: add make check in system
 
     if len(args) == 2 and args[0] == "make":
-        print("make diskclean")
+        print("make disk clean")
         print(args[1])
 
         clean_command = "make"
@@ -15,7 +15,7 @@ def make_action(*args):
                                       stdout=subprocess.PIPE,
                                       stderr=subprocess.STDOUT,
                                       cwd=args[1])
-        #
+
         print(clean_proc.stdout.read(350).strip().decode("utf-8"))
 
         # fixme: SIGVTALRM signal
