@@ -1,5 +1,5 @@
 from sys import exit as sys_exit
-import subprocess
+from subprocess import call
 from subprocess import check_output
 
 
@@ -24,11 +24,11 @@ def git_action(*args):
         # command = "git {cmd}".format(cmd=args[0])
         # reset_command = "git reset --hard"
 
-        _ = subprocess.call(["git", args[0]], cwd=args[1])
+        _ = call(["git", args[0]], cwd=args[1])
 
     elif len(args) == 3 and args[0] == "clone":
         print("git clone {repo} {path}".format(repo=args[1], path=args[2]))
-        _ = subprocess.call(["git", args[0], args[1], args[2]])
+        _ = call(["git", args[0], args[1], args[2]])
 
     else:
         print("trouble with args")
