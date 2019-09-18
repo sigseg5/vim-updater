@@ -10,20 +10,9 @@ def make_action(*args):
         print("make disk clean")
         print(args[1])
 
-        clean_command = "make"
-        clean_proc = subprocess.Popen(clean_command, shell=True,
-                                      stdout=subprocess.PIPE,
-                                      stderr=subprocess.STDOUT,
-                                      cwd=args[1])
-
-        print(clean_proc.stdout.read(350).strip().decode("utf-8"))
-
-        # fixme: SIGVTALRM signal
-
-        # make_command = "make"
-        # make_proc = subprocess.Popen(make_command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, cwd=args[1])
-
-        # print(make_proc.stdout.read(350).strip().decode("utf-8"))
+        make_command = "make"
+        clean_proc = subprocess.call([make_command, "distclean"], cwd=args[1])
+        make_proc = subprocess.call([make_command], cwd=args[1])
 
     # elif len(args) == 4 and args[0] == "sudo" \
     #         and args[1] == "make" \
@@ -41,9 +30,3 @@ def make_action(*args):
     else:
         print("args error")
         sys_exit(1)
-
-    # try:
-    #     passw = getpass.getpass(prompt='Password: ', stream=stderr)
-    # except getpass.GetPassWarning:
-    #     print("echo")
-    # print(passw)
