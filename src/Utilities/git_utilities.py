@@ -1,8 +1,14 @@
 from sys import exit as sys_exit
 import subprocess
+from subprocess import check_output
 
 
 # can only clone and pull from github repo
+
+
+def check_git_on_device():
+    proc = check_output(["git", "--version"])
+    return proc.decode()
 
 
 def git_action(*args):
