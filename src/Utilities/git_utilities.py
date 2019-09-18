@@ -28,10 +28,8 @@ def git_action(*args):
 
     elif len(args) == 3 and args[0] == "clone":
         print("git clone {repo} {path}".format(repo=args[1], path=args[2]))
-        command = "git {cmd} {repo} {path}".format(cmd=args[0], repo=args[1], path=args[2])
-        proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        _ = subprocess.call(["git", args[0], args[1], args[2]])
 
-        print(proc.stdout.read(350).strip().decode("utf-8"))
     else:
         print("trouble with args")
         sys_exit(1)
