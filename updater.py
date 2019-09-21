@@ -51,33 +51,32 @@ if str(GIT_STATUS).count("git version") != 1:
     openBrowser(GIT_DOWNLOAD_PAGE)
     sys_exit(0)
 
+# FIXME: "fatal: not a git repository (or any of the parent directories): .git" then UPDATER_DIR only exist
 if path.isdir(USER_FOLDER) and path.exists(USER_FOLDER + UPDATER_DIR):
-    print("work folder and updater dir here, check vim src folder")
+    print("Work folder and updater dir here, check vim src folder")
     if path.exists(USER_FOLDER + UPDATER_DIR):
-        print("vim folder here")
-        print("cd vim & output vim version in system & start pull")
-        print("pulling")
+        print("VIM folder here")
+        print("Pulling from github...")
         isUpdated = git_action("pull", USER_FOLDER + UPDATER_DIR)
         if isUpdated:
-            print("vim already up to date")
+            print("VIM already up to date\n")
             print(check_current_vim_version_in_system())
-            print(check_current_vim_version_in_src(USER_FOLDER + UPDATER_DIR))
             sys_exit(0)
         print(check_current_vim_version_in_src(USER_FOLDER + UPDATER_DIR))
         make_action("make", USER_FOLDER + UPDATER_DIR)
         make_action("install", USER_FOLDER + UPDATER_DIR)
-        print("vim updated to {}".format(check_current_vim_version_in_system()))
+        print("VIM updated to {}".format(check_current_vim_version_in_system()))
 
     else:
         git_action("clone", VIM_REPO, USER_FOLDER + UPDATER_DIR)
-        print(check_current_vim_version_in_src(USER_FOLDER + UPDATER_DIR))
+        print("Current vim version in src\n" + check_current_vim_version_in_src(USER_FOLDER + UPDATER_DIR))
         make_action("make", USER_FOLDER + UPDATER_DIR)
         make_action("install", USER_FOLDER + UPDATER_DIR)
-        print("vim updated to {}".format(check_current_vim_version_in_system()))
+        print("VIM updated to {}".format(check_current_vim_version_in_system()))
 
 elif path.isdir(USER_FOLDER) and not path.exists(USER_FOLDER + UPDATER_DIR):
-    print("can't find work folder")
-    print("try to create updater dir")
+    print("Can't find work folder")
+    print("Try to create updater dir")
     try:
         mkdir(USER_FOLDER + UPDATER_DIR)
         print("Directory {user_folder}{updater_dir} successfully created".format(user_folder=USER_FOLDER,
@@ -87,13 +86,13 @@ elif path.isdir(USER_FOLDER) and not path.exists(USER_FOLDER + UPDATER_DIR):
                                                                            updater_dir=UPDATER_DIR))
         sys_exit(1)
 
-    print("start git clone")
+    print("Starting git clone")
     git_action("clone", VIM_REPO, USER_FOLDER + UPDATER_DIR)
-    print(check_current_vim_version_in_src(USER_FOLDER + UPDATER_DIR))
+    print("Current vim version in src\n" + check_current_vim_version_in_src(USER_FOLDER + UPDATER_DIR))
     make_action("make", USER_FOLDER + UPDATER_DIR)
     make_action("install", USER_FOLDER + UPDATER_DIR)
-    print("vim updated to {}".format(check_current_vim_version_in_system()))
+    print("VIM updated to {}".format(check_current_vim_version_in_system()))
 
 else:
-    print("error with user folder: {user_folder}".format(user_folder=USER_FOLDER))
+    print("Error with user folder: {user_folder}".format(user_folder=USER_FOLDER))
     sys_exit(1)
