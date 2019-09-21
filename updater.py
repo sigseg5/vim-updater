@@ -14,7 +14,7 @@ from src.Utilities.git_utilities import git_action
 from src.Utilities.git_utilities import check_git_on_device
 from src.Utilities.installer import make_action
 
-UPDATER_VER = "0.1"
+UPDATER_VER = "0.1.1"
 OS_TYPE = check_os()
 
 
