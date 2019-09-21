@@ -18,7 +18,7 @@ def make_action(*args):
 
         print("make install")
         # TODO: specify getpass by OS type
-        sudo_pass = getpass.getpass()
+        sudo_pass = getpass.getpass("Please enter your password: ")
         install_command = "sudo make install"
         install_proc = call("echo {} | sudo -S {}".format(sudo_pass, install_command), shell=True, cwd=args[1])
 

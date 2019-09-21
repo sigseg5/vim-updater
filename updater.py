@@ -59,6 +59,7 @@ if path.isdir(USER_FOLDER) and path.exists(USER_FOLDER + UPDATER_DIR):
         print("cd vim & output vim version in system & start pull")
         print("pulling")
         git_action("pull", USER_FOLDER + UPDATER_DIR)
+        # TODO: add "already to update" output
         print(check_current_vim_version_in_src(USER_FOLDER + UPDATER_DIR))
         make_action("make", USER_FOLDER + UPDATER_DIR)
         make_action("install", USER_FOLDER + UPDATER_DIR)
