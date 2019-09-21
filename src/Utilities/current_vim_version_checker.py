@@ -3,9 +3,6 @@ from os import path
 from sys import exit as sys_exit
 
 
-# TODO: add try except
-
-
 def check_current_vim_version_in_system():
     print("current vim version in system")
     command = "vim --version"
@@ -38,11 +35,12 @@ def check_current_vim_version_in_src(path_to_vim_folder):
                 if not first_minor_in_text_flag:
                     # fixme not safe solution
                     if line.find("MAJOR") != -1:
-                        major_and_minor_version += line
+                        major_and_minor_version += line.strip("MAJOR = \n")
+                        major_and_minor_version += "."
                     if line.find("MINOR") != -1:
-                        major_and_minor_version += line
+                        major_and_minor_version += line.strip("MINOR = ")
                         first_minor_in_text_flag = True
-            complete_version += major_and_minor_version
+            complete_version += "VIM - Vi IMproved " + major_and_minor_version
     except FileNotFoundError:
         print("error")
         sys_exit(1)
