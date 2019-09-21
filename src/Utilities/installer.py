@@ -1,7 +1,6 @@
 import getpass
 from sys import exit as sys_exit
 from subprocess import call
-import subprocess
 
 
 def make_action(*args):
@@ -18,12 +17,10 @@ def make_action(*args):
     elif len(args) == 2 and args[0] == "install":
 
         print("make install")
-        # TODO: add getpass
-        sudo_pass = "123"
+        # TODO: specify getpass by OS type
+        sudo_pass = getpass.getpass()
         install_command = "sudo make install"
-        # _ = call(["sudo", "make", "install"], cwd=args[1])
-        install_proc = subprocess.Popen(install_command, cwd=args[1], stdin=subprocess.PIPE)
-        install_proc.communicate(sudo_pass)[0]
+        install_proc = call("echo {} | sudo -S {}".format(sudo_pass, install_command), shell=True, cwd=args[1])
 
     else:
         print("args error")
