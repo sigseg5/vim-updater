@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 
+# TODO: add os.path.join
+
 from sys import exit as sys_exit
 from os import path
 from os import mkdir
@@ -58,11 +60,14 @@ if path.isdir(USER_FOLDER) and path.exists(USER_FOLDER + UPDATER_DIR):
         print("pulling")
         git_action("pull", USER_FOLDER + UPDATER_DIR)
         print(check_current_vim_version_in_src(USER_FOLDER + UPDATER_DIR))
-        # make_action("make", USER_FOLDER + UPDATER_DIR)
+        make_action("make", USER_FOLDER + UPDATER_DIR)
+        make_action("install", USER_FOLDER + UPDATER_DIR)
 
     else:
         git_action("clone", VIM_REPO, USER_FOLDER + UPDATER_DIR)
         print(check_current_vim_version_in_src(USER_FOLDER + UPDATER_DIR + VIM_FOLDER))
+        make_action("make", USER_FOLDER + UPDATER_DIR)
+        make_action("install", USER_FOLDER + UPDATER_DIR)
 
 elif path.isdir(USER_FOLDER) and not path.exists(USER_FOLDER + UPDATER_DIR):
     print("can't find work folder")
@@ -79,6 +84,8 @@ elif path.isdir(USER_FOLDER) and not path.exists(USER_FOLDER + UPDATER_DIR):
     print("start git clone")
     git_action("clone", VIM_REPO, USER_FOLDER + UPDATER_DIR)
     print(check_current_vim_version_in_src(USER_FOLDER + UPDATER_DIR + VIM_FOLDER))
+    make_action("make", USER_FOLDER + UPDATER_DIR)
+    make_action("install", USER_FOLDER + UPDATER_DIR)
 
 else:
     print("error with user folder: {user_folder}".format(user_folder=USER_FOLDER))
