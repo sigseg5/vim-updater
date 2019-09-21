@@ -14,7 +14,7 @@ from src.Utilities.git_utilities import git_action
 from src.Utilities.git_utilities import check_git_on_device
 from src.Utilities.installer import make_action
 
-UPDATER_VER = "0.0.1"
+UPDATER_VER = "0.1"
 OS_TYPE = check_os()
 
 
@@ -55,22 +55,25 @@ if path.isdir(USER_FOLDER) and path.exists(USER_FOLDER + UPDATER_DIR):
     print("work folder and updater dir here, check vim src folder")
     if path.exists(USER_FOLDER + UPDATER_DIR):
         print("vim folder here")
-        print(check_current_vim_version_in_system())
         print("cd vim & output vim version in system & start pull")
         print("pulling")
         isUpdated = git_action("pull", USER_FOLDER + UPDATER_DIR)
         if isUpdated:
             print("vim already up to date")
+            print(check_current_vim_version_in_system())
+            print(check_current_vim_version_in_src(USER_FOLDER + UPDATER_DIR))
             sys_exit(0)
         print(check_current_vim_version_in_src(USER_FOLDER + UPDATER_DIR))
         make_action("make", USER_FOLDER + UPDATER_DIR)
         make_action("install", USER_FOLDER + UPDATER_DIR)
+        print("vim updated to {}".format(check_current_vim_version_in_system()))
 
     else:
         git_action("clone", VIM_REPO, USER_FOLDER + UPDATER_DIR)
-        print(check_current_vim_version_in_src(USER_FOLDER + UPDATER_DIR + VIM_FOLDER))
+        print(check_current_vim_version_in_src(USER_FOLDER + UPDATER_DIR))
         make_action("make", USER_FOLDER + UPDATER_DIR)
         make_action("install", USER_FOLDER + UPDATER_DIR)
+        print("vim updated to {}".format(check_current_vim_version_in_system()))
 
 elif path.isdir(USER_FOLDER) and not path.exists(USER_FOLDER + UPDATER_DIR):
     print("can't find work folder")
@@ -86,9 +89,10 @@ elif path.isdir(USER_FOLDER) and not path.exists(USER_FOLDER + UPDATER_DIR):
 
     print("start git clone")
     git_action("clone", VIM_REPO, USER_FOLDER + UPDATER_DIR)
-    print(check_current_vim_version_in_src(USER_FOLDER + UPDATER_DIR + VIM_FOLDER))
+    print(check_current_vim_version_in_src(USER_FOLDER + UPDATER_DIR))
     make_action("make", USER_FOLDER + UPDATER_DIR)
     make_action("install", USER_FOLDER + UPDATER_DIR)
+    print("vim updated to {}".format(check_current_vim_version_in_system()))
 
 else:
     print("error with user folder: {user_folder}".format(user_folder=USER_FOLDER))
