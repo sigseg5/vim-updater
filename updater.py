@@ -13,9 +13,12 @@ from src.Utilities.current_vim_version_checker import check_current_vim_version_
 from src.Utilities.git_utilities import git_action
 from src.Utilities.git_utilities import check_git_on_device
 from src.Utilities.installer import make_action
+from src.Utilities.installer import check_make_status
 
 UPDATER_VER = "0.1.1"
 OS_TYPE = check_os()
+# TODO: add CLTools check on macOS
+isMakeInstalled = check_make_status()
 GIT_DOWNLOAD_PAGE = "http://git-scm.com/"
 VIM_DOWNLOAD_PAGE = "https://www.vim.org/download.php#pc"
 
@@ -38,6 +41,17 @@ if OS_TYPE == "win":
     openBrowser(VIM_DOWNLOAD_PAGE)
     sys_exit(0)
 
+if not isMakeInstalled and OS_TYPE == "mac":
+    print("""
+    make not found in system
+    1. Download Xcode from AppStore
+    2. Run "xcode-select --install" in terminal
+    """)
+    sys_exit(0)
+elif not isMakeInstalled:
+    print("Unknown error with make")
+    sys_exit(1)
+
 print("""
     VIM updater version: {updater_version}
     OS: {os_type}
@@ -51,7 +65,6 @@ if str(GIT_STATUS).count("git version") != 1:
     openBrowser(GIT_DOWNLOAD_PAGE)
     sys_exit(0)
 
-# TODO: add CLTools check on macOS
 
 # FIXME: "fatal: not a git repository (or any of the parent directories): .git" then UPDATER_DIR only exist
 if path.isdir(USER_FOLDER) and path.exists(USER_FOLDER + UPDATER_DIR):
@@ -70,6 +83,7 @@ if path.isdir(USER_FOLDER) and path.exists(USER_FOLDER + UPDATER_DIR):
         print("VIM updated to {}".format(check_current_vim_version_in_system()))
 
     else:
+        print("Starting git clone")
         git_action("clone", VIM_REPO, USER_FOLDER + UPDATER_DIR)
         print("Current vim version in src\n" + check_current_vim_version_in_src(USER_FOLDER + UPDATER_DIR))
         make_action("make", USER_FOLDER + UPDATER_DIR)

@@ -3,6 +3,10 @@ from sys import exit as sys_exit
 from subprocess import call
 
 
+def check_make_status():
+    return False
+
+
 def make_action(*args):
     # TODO: add make check in system
 
