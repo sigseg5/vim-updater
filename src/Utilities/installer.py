@@ -1,10 +1,15 @@
 import getpass
 from sys import exit as sys_exit
 from subprocess import call
+from subprocess import check_output
 
 
 def check_make_status():
-    return False
+    make_check_proc = check_output(["make", "--version"])
+    if (make_check_proc.decode('utf-8')).count("GNU Make") == 1:
+        return True
+    else:
+        return False
 
 
 def make_action(*args):
