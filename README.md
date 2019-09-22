@@ -5,17 +5,18 @@
 1. macOS/Linux OS (Windows don't supported now)
 2. GIT
 3. Python 3
+4. Xcode and Command Line Tools for macOS
 
 ### Usage
-1. `git clone https://github.com/kirillNK/vim-updater.git`
+1. `git clone https://github.com/sigseg5/vim-updater.git`
 or download sources [here](https://github.com/sigseg5/vim-updater/archive/master.zip)
 2. `cd vim-updater`
 3. `chmod +x updater.py` only for macOS and Linux
 4. `./updater.py`
 
 ### Contribute
-Any ideas or trouble? Please open [issue](https://github.com/kirillNK/vim-updater/issues) 
-or [pull request](https://github.com/kirillNK/vim-updater/pulls) 
+Any ideas or trouble? Please open [issue](https://github.com/sigseg5/vim-updater/issues) 
+or [pull request](https://github.com/sigseg5/vim-updater/pulls) 
 
 ### Communicate
 [twitter](https://twitter.com/kirill_nk)<br>
