@@ -44,8 +44,8 @@ if OS_TYPE == "win":
 if not isMakeInstalled and OS_TYPE == "mac":
     print("""
     make not found in system
-    1. Download Xcode from AppStore
-    2. Run "xcode-select --install" in terminal
+    Download Xcode from AppStore and run "xcode-select --install" in terminal
+    Or run "brew install make" if you have Homebrew installed
     """)
     sys_exit(0)
 elif not isMakeInstalled:
