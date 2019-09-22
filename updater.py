@@ -17,6 +17,7 @@ from src.Utilities.installer import make_action
 UPDATER_VER = "0.1.1"
 OS_TYPE = check_os()
 GIT_DOWNLOAD_PAGE = "http://git-scm.com/"
+VIM_DOWNLOAD_PAGE = "https://www.vim.org/download.php#pc"
 
 try:
     GIT_STATUS = check_git_on_device()
@@ -31,9 +32,11 @@ VIM_FOLDER = "/vim"
 
 VIM_REPO = "https://github.com/vim/vim.git"
 
-if OS_TYPE == "win32":
+if OS_TYPE == "win":
     print("Windows don't support yet")
-    sys_exit(666)
+    print("Please download vim here: {}".format(VIM_DOWNLOAD_PAGE))
+    openBrowser(VIM_DOWNLOAD_PAGE)
+    sys_exit(0)
 
 print("""
     VIM updater version: {updater_version}
@@ -47,6 +50,8 @@ if str(GIT_STATUS).count("git version") != 1:
     print("git not found")
     openBrowser(GIT_DOWNLOAD_PAGE)
     sys_exit(0)
+
+# TODO: add CLTools check on macOS
 
 # FIXME: "fatal: not a git repository (or any of the parent directories): .git" then UPDATER_DIR only exist
 if path.isdir(USER_FOLDER) and path.exists(USER_FOLDER + UPDATER_DIR):
