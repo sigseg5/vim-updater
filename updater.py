@@ -16,19 +16,16 @@ from src.Utilities.installer import make_action
 
 UPDATER_VER = "0.1.1"
 OS_TYPE = check_os()
+GIT_DOWNLOAD_PAGE = "http://git-scm.com/"
 
-
-# fixme: UnicodeDecodeError on windows. Temp solution with try-except
-# 'utf-8' codec can't decode byte 0xad in pos 6: invalid start byte
 try:
     GIT_STATUS = check_git_on_device()
-except UnicodeDecodeError:
-    print("unicode decode error")
-    sys_exit(1)
+except FileNotFoundError:
+    print("git not installed")
+    openBrowser(GIT_DOWNLOAD_PAGE)
+    sys_exit(0)
 
-GIT_DOWNLOAD_PAGE = "http://git-scm.com/"
 USER_FOLDER = path.expanduser("~")
-# fixme: UPDATER_DIR = "/.vim_updater/vim" on linux machine
 UPDATER_DIR = "/.vim_updater"
 VIM_FOLDER = "/vim"
 
