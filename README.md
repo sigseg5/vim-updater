@@ -9,7 +9,7 @@
 
 ### Usage
 1. `git clone https://github.com/sigseg5/vim-updater.git`
-or download sources [here](https://github.com/sigseg5/vim-updater/archive/master.zip)
+or download sources [here (latest changes)](https://github.com/sigseg5/vim-updater/archive/master.zip) or download last stable [release](https://github.com/sigseg5/vim-updater/releases)
 2. `cd vim-updater`
 3. `chmod +x updater.py` only for macOS and Linux
 4. `./updater.py`
