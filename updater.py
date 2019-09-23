@@ -3,6 +3,7 @@
 from sys import exit as sys_exit
 from os import path
 from os import mkdir
+from shutil import rmtree
 
 from src.Utilities.os_checker import check_os
 from src.Utilities.git_downloader_from_internet import openBrowser
@@ -13,7 +14,7 @@ from src.Utilities.git_utilities import check_git_on_device
 from src.Utilities.installer import make_action
 from src.Utilities.installer import check_make_status
 
-UPDATER_VER = "0.1.1"
+UPDATER_VER = "0.2"
 
 OS_TYPE = check_os()
 USER_FOLDER = path.expanduser("~")
@@ -65,13 +66,20 @@ print("""
            git_status=GIT_STATUS))
 
 
-# FIXME: "fatal: not a git repository (or any of the parent directories): .git" then UPDATER_DIR only exist
 if path.isdir(USER_FOLDER) and path.exists(USER_FOLDER + UPDATER_DIR):
     print("Work folder and updater dir here, check vim src folder")
     if path.exists(USER_FOLDER + UPDATER_DIR):
         print("VIM folder here")
+        if not path.exists(USER_FOLDER + UPDATER_DIR + "/.git"):
+            print("Can't find .git folder")
+            print("Removing work folder")
+            rmtree(USER_FOLDER + UPDATER_DIR)
+            print("Work folder remover successfully, please run updater again")
+            sys_exit(0)
+
         print("Pulling from github...")
         isUpdated = git_action("pull", USER_FOLDER + UPDATER_DIR)
+
         if isUpdated:
             print("VIM already up to date\n")
             print(check_current_vim_version_in_system())
