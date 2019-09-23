@@ -2,8 +2,7 @@ from sys import platform
 
 
 def check_os():
-    # fixme: platform == "linux2" return true on macOS
-    if platform == "linux":
+    if platform.startswith("linux"):
         return "linux"
     elif platform == "darwin":
         return "mac"
