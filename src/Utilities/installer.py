@@ -25,9 +25,11 @@ def make_action(*args):
 
         print("make install")
         # TODO: add wrong pass checker
-        sudo_pass = getpass.getpass("Please enter your password: ")
+        sudo_pass = getpass.getpass()
         install_command = "sudo make install"
-        install_proc = call("echo {} | sudo -S {}".format(sudo_pass, install_command), shell=True, cwd=args[1])
+        install_proc = check_output("echo {} | sudo -S {}".format(sudo_pass, install_command), shell=True, cwd=args[1])
+        if install_proc.decode('utf-8').count("Sorry, try again.") >= 1:
+            pass
 
     else:
         print("args error")

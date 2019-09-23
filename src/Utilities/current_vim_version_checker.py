@@ -31,7 +31,6 @@ def check_current_vim_version_in_src(path_to_vim_folder):
             first_minor_in_text_flag = False
             for line in make_file:
                 if not first_minor_in_text_flag:
-                    # fixme not safe solution
                     if line.find("MAJOR") != -1:
                         major_and_minor_version += line.strip("MAJOR = \n")
                         major_and_minor_version += "."
