@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 
-# TODO: add os.path.join
-
 from sys import exit as sys_exit
 from os import path
 from os import mkdir
@@ -16,11 +14,17 @@ from src.Utilities.installer import make_action
 from src.Utilities.installer import check_make_status
 
 UPDATER_VER = "0.1.1"
+
 OS_TYPE = check_os()
-# TODO: add CLTools check on macOS
-isMakeInstalled = check_make_status()
+USER_FOLDER = path.expanduser("~")
+UPDATER_DIR = "/.vim_updater"
+VIM_FOLDER = "/vim"
+
 GIT_DOWNLOAD_PAGE = "http://git-scm.com/"
 VIM_DOWNLOAD_PAGE = "https://www.vim.org/download.php#pc"
+VIM_REPO = "https://github.com/vim/vim.git"
+
+isMakeInstalled = check_make_status()
 
 try:
     GIT_STATUS = check_git_on_device()
@@ -29,17 +33,17 @@ except FileNotFoundError:
     openBrowser(GIT_DOWNLOAD_PAGE)
     sys_exit(0)
 
-USER_FOLDER = path.expanduser("~")
-UPDATER_DIR = "/.vim_updater"
-VIM_FOLDER = "/vim"
-
-VIM_REPO = "https://github.com/vim/vim.git"
+if str(GIT_STATUS).count("git version") != 1:
+    print("git not found")
+    openBrowser(GIT_DOWNLOAD_PAGE)
+    sys_exit(0)
 
 if OS_TYPE == "win":
     print("Windows don't support yet")
     print("Please download vim here: {}".format(VIM_DOWNLOAD_PAGE))
     openBrowser(VIM_DOWNLOAD_PAGE)
     sys_exit(0)
+
 
 if not isMakeInstalled and OS_TYPE == "mac":
     print("""
@@ -59,11 +63,6 @@ print("""
 """.format(updater_version=UPDATER_VER,
            os_type=OS_TYPE,
            git_status=GIT_STATUS))
-
-if str(GIT_STATUS).count("git version") != 1:
-    print("git not found")
-    openBrowser(GIT_DOWNLOAD_PAGE)
-    sys_exit(0)
 
 
 # FIXME: "fatal: not a git repository (or any of the parent directories): .git" then UPDATER_DIR only exist

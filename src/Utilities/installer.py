@@ -13,8 +13,6 @@ def check_make_status():
 
 
 def make_action(*args):
-    # TODO: add make check in system
-
     if len(args) == 2 and args[0] == "make":
         print("make disk clean")
         print(args[1])
@@ -26,7 +24,7 @@ def make_action(*args):
     elif len(args) == 2 and args[0] == "install":
 
         print("make install")
-        # TODO: specify getpass by OS type
+        # TODO: add wrong pass checker
         sudo_pass = getpass.getpass("Please enter your password: ")
         install_command = "sudo make install"
         install_proc = call("echo {} | sudo -S {}".format(sudo_pass, install_command), shell=True, cwd=args[1])

@@ -19,8 +19,6 @@ def check_current_vim_version_in_system():
 
 
 def check_current_vim_version_in_src(path_to_vim_folder):
-    # try to create dictionary in future
-
     complete_version = ""
 
     if not path.isdir(path_to_vim_folder):
