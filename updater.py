@@ -68,7 +68,7 @@ print("""
 
 # TODO: add system args support to force Make
 # FIXME: not safe (add req check)
-# if not len(argv) - 1 != 1:
+# if len(argv) - 1 != 1:
 #     print("Wrong args")
 #     sys_exit(1)
 # else:
