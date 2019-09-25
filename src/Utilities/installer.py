@@ -10,7 +10,7 @@ def passInput(args):
     sudo_pass = getpass.getpass()
     install_command = "sudo make install"
     try:
-        install_proc = check_output("echo {} | sudo -S {}".format(sudo_pass, install_command), shell=True, cwd=args[1])
+        install_proc = call("echo {} | sudo -S {}".format(sudo_pass, install_command), shell=True, cwd=args[1])
     except CalledProcessError:
         print("\nWrong password\nRun updater again")
         sys_exit(1)
