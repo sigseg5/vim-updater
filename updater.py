@@ -26,7 +26,10 @@ GIT_DOWNLOAD_PAGE = "http://git-scm.com/"
 VIM_DOWNLOAD_PAGE = "https://www.vim.org/download.php#pc"
 VIM_REPO = "https://github.com/vim/vim.git"
 
-isMakeInstalled = check_make_status()
+if OS_TYPE == "win":
+    pass
+else:
+    isMakeInstalled = check_make_status()
 
 try:
     GIT_STATUS = check_git_on_device()
