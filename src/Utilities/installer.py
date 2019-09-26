@@ -12,7 +12,7 @@ def passInput(args):
     try:
         install_proc = call("echo {} | sudo -S {}".format(sudo_pass, install_command), shell=True, cwd=args[1])
     except CalledProcessError:
-        print("\nWrong password\nRun updater again")
+        print("\nWrong password\nRun updater again with '-fm argument'")
         sys_exit(1)
         
 
@@ -27,7 +27,6 @@ def check_make_status():
 def make_action(*args):
     if len(args) == 2 and args[0] == "make":
         print("make disk clean")
-        print(args[1])
 
         make_command = "make"
         clean_proc = call([make_command, "distclean"], cwd=args[1])

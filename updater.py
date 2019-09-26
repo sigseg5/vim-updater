@@ -15,7 +15,7 @@ from src.Utilities.git_utilities import check_git_on_device
 from src.Utilities.installer import make_action
 from src.Utilities.installer import check_make_status
 
-UPDATER_VER = "0.2"
+UPDATER_VER = "0.3"
 
 OS_TYPE = check_os()
 USER_FOLDER = path.expanduser("~")
@@ -66,7 +66,6 @@ print("""
            os_type=OS_TYPE,
            git_status=GIT_STATUS))
 
-# FIXME: not safe (add req check)
 if len(argv) == 1:
     pass
 elif len(argv) == 2 and str(argv[1]) == "-fm" and isMakeInstalled:
