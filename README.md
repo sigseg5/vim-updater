@@ -13,7 +13,8 @@
 or download sources [here (latest changes)](https://github.com/sigseg5/vim-updater/archive/master.zip) or download last stable [release](https://github.com/sigseg5/vim-updater/releases)
 3. `cd vim-updater`
 4. `chmod +x updater.py` only for macOS and Linux
-5. `./updater.py`
+5. `./updater.py`<br>
+You also can use `-fm` argument (force make) to run `make` and `make install` command
 
 ### Contribute
 Any ideas or trouble? Please open [issue](https://github.com/sigseg5/vim-updater/issues) 
