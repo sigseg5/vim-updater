@@ -66,20 +66,18 @@ print("""
            os_type=OS_TYPE,
            git_status=GIT_STATUS))
 
-# TODO: add system args support to force Make
 # FIXME: not safe (add req check)
-# if len(argv) - 1 != 1:
-#     print("Wrong args")
-#     sys_exit(1)
-# else:
-#     if str(argv[1]) == "-fm" and isMakeInstalled:
-#         print("Force build and install vim")
-#         make_action("make", USER_FOLDER + UPDATER_DIR)
-#         make_action("install", USER_FOLDER + UPDATER_DIR)
-#         sys_exit(0)
-#     else:
-#         sys_exit(1)
-#         print("Something wrong\nTry run script without args")
+if len(argv) == 1:
+    pass
+elif len(argv) == 2 and str(argv[1]) == "-fm" and isMakeInstalled:
+    print("Force build and install vim")
+    make_action("make", USER_FOLDER + UPDATER_DIR)
+    make_action("install", USER_FOLDER + UPDATER_DIR)
+    sys_exit(0)
+else:
+    print("Supported args: '-fm'")
+    print("Something wrong\nTry run script without args")
+    sys_exit(1)
 
 if path.isdir(USER_FOLDER) and path.exists(USER_FOLDER + UPDATER_DIR):
     print("Work folder and updater dir here, check vim src folder")
