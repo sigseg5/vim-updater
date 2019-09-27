@@ -15,7 +15,7 @@ from src.Utilities.git_utilities import check_git_on_device
 from src.Utilities.installer import make_action
 from src.Utilities.installer import check_make_status
 
-UPDATER_VER = "0.3"
+UPDATER_VER = "1.0"
 
 OS_TYPE = check_os()
 USER_FOLDER = path.expanduser("~")
@@ -27,9 +27,10 @@ VIM_DOWNLOAD_PAGE = "https://www.vim.org/download.php#pc"
 VIM_REPO = "https://github.com/vim/vim.git"
 
 if OS_TYPE == "win":
-    pass
-else:
-    isMakeInstalled = check_make_status()
+    print("Windows don't fully supported yet")
+    print("Please download vim here: {}".format(VIM_DOWNLOAD_PAGE))
+    openBrowser(GIT_DOWNLOAD_PAGE)
+    sys_exit(0)
 
 try:
     GIT_STATUS = check_git_on_device()
@@ -43,13 +44,7 @@ if str(GIT_STATUS).count("git version") != 1:
     openBrowser(GIT_DOWNLOAD_PAGE)
     sys_exit(0)
 
-if OS_TYPE == "win":
-    print("Windows don't support yet")
-    print("Please download vim here: {}".format(VIM_DOWNLOAD_PAGE))
-    openBrowser(VIM_DOWNLOAD_PAGE)
-    sys_exit(0)
-
-
+isMakeInstalled = check_make_status()
 if not isMakeInstalled and OS_TYPE == "mac":
     print("""
     make not found in system
