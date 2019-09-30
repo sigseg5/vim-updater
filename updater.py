@@ -32,6 +32,27 @@ if OS_TYPE == "win":
     openBrowser(GIT_DOWNLOAD_PAGE)
     sys_exit(0)
 
+isMakeInstalled = check_make_status()
+
+# Args parsing
+if len(argv) == 1:
+    pass
+elif len(argv) == 2 and str(argv[1]) == "--fm" and isMakeInstalled:
+    # FIXME: fix `make: *** No rule to make target `distclean'.  Stop.` then updater dir don't exists. Call sys_exit
+    print("Force build and install vim")
+    make_action("make", USER_FOLDER + UPDATER_DIR)
+    make_action("install", USER_FOLDER + UPDATER_DIR)
+    sys_exit(0)
+elif len(argv) == 2 and str(argv[1]) == "--clean" and isMakeInstalled:
+    print("Removing work folder")
+    rmtree(USER_FOLDER + UPDATER_DIR)
+    print("Work folder remover successfully, please run updater again")
+    sys_exit(0)
+else:
+    print("Supported args: '-fm'")
+    print("Something wrong\nTry run script without args")
+    sys_exit(1)
+
 try:
     GIT_STATUS = check_git_on_device()
 except FileNotFoundError:
@@ -44,7 +65,6 @@ if str(GIT_STATUS).count("git version") != 1:
     openBrowser(GIT_DOWNLOAD_PAGE)
     sys_exit(0)
 
-isMakeInstalled = check_make_status()
 if not isMakeInstalled and OS_TYPE == "mac":
     print("""
     make not found in system
@@ -63,18 +83,6 @@ print("""
 """.format(updater_version=UPDATER_VER,
            os_type=OS_TYPE,
            git_status=GIT_STATUS))
-
-if len(argv) == 1:
-    pass
-elif len(argv) == 2 and str(argv[1]) == "-fm" and isMakeInstalled:
-    print("Force build and install vim")
-    make_action("make", USER_FOLDER + UPDATER_DIR)
-    make_action("install", USER_FOLDER + UPDATER_DIR)
-    sys_exit(0)
-else:
-    print("Supported args: '-fm'")
-    print("Something wrong\nTry run script without args")
-    sys_exit(1)
 
 if path.isdir(USER_FOLDER) and path.exists(USER_FOLDER + UPDATER_DIR):
     print("Work folder and updater dir here, check vim src folder")
