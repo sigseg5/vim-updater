@@ -17,10 +17,13 @@ from src.Utilities.git_utilities import check_git_on_device
 from src.Utilities.installer import make_action
 from src.Utilities.installer import check_make_status
 
+UPDATER_VER = "1.1"
+
 parser = argparse.ArgumentParser()
 # TODO: add version output
-parser.add_argument("--fm", help="Force `make` and `make install`", action="store")
-parser.add_argument("--clean", help="Clean updater folder", action="store")
+parser.add_argument("-f", "--fm", help="Force `make` and `make install`", action="store_true")
+parser.add_argument("-c", "--clean", help="Clean updater folder", action="store_true")
+parser.add_argument("-v", "--version", action="version", version="vim updater {}".format(UPDATER_VER))
 args = parser.parse_args()
 
 # if len(args) == 0:
@@ -39,7 +42,6 @@ args = parser.parse_args()
 
 sys_exit(1)
 
-UPDATER_VER = "1.0"
 
 OS_TYPE = check_os()
 USER_FOLDER = path.expanduser("~")
