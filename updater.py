@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 
+import argparse
 from sys import exit as sys_exit
+# TODO: remove import
 from sys import argv
 from os import path
 from os import mkdir
@@ -14,6 +16,28 @@ from src.Utilities.git_utilities import git_action
 from src.Utilities.git_utilities import check_git_on_device
 from src.Utilities.installer import make_action
 from src.Utilities.installer import check_make_status
+
+parser = argparse.ArgumentParser()
+# TODO: add version output
+parser.add_argument("--fm", help="Force `make` and `make install`", action="store")
+parser.add_argument("--clean", help="Clean updater folder", action="store")
+args = parser.parse_args()
+
+# if len(args) == 0:
+#     print("zero")
+#     pass
+#     sys_exit(0)
+# if args.fm:
+#     print("force make")
+#     sys_exit(1)
+# elif args.clean:
+#     print("clean")
+#     sys_exit(0)
+# else:
+#     print("exit")
+#     sys_exit(1)
+
+sys_exit(1)
 
 UPDATER_VER = "1.0"
 
@@ -35,23 +59,23 @@ if OS_TYPE == "win":
 isMakeInstalled = check_make_status()
 
 # Args parsing
-if len(argv) == 1:
-    pass
-elif len(argv) == 2 and str(argv[1]) == "--fm" and isMakeInstalled:
-    # FIXME: fix `make: *** No rule to make target `distclean'.  Stop.` then updater dir don't exists. Call sys_exit
-    print("Force build and install vim")
-    make_action("make", USER_FOLDER + UPDATER_DIR)
-    make_action("install", USER_FOLDER + UPDATER_DIR)
-    sys_exit(0)
-elif len(argv) == 2 and str(argv[1]) == "--clean" and isMakeInstalled:
-    print("Removing work folder")
-    rmtree(USER_FOLDER + UPDATER_DIR)
-    print("Work folder remover successfully, please run updater again")
-    sys_exit(0)
-else:
-    print("Supported args: '-fm'")
-    print("Something wrong\nTry run script without args")
-    sys_exit(1)
+# if len(argv) == 1:
+#     pass
+# elif len(argv) == 2 and str(argv[1]) == "--fm" and isMakeInstalled:
+#     # FIXME: fix `make: *** No rule to make target `distclean'.  Stop.` then updater dir don't exists. Call sys_exit
+#     print("Force build and install vim")
+#     make_action("make", USER_FOLDER + UPDATER_DIR)
+#     make_action("install", USER_FOLDER + UPDATER_DIR)
+#     sys_exit(0)
+# elif len(argv) == 2 and str(argv[1]) == "--clean" and isMakeInstalled:
+#     print("Removing work folder")
+#     rmtree(USER_FOLDER + UPDATER_DIR)
+#     print("Work folder remover successfully, please run updater again")
+#     sys_exit(0)
+# else:
+#     print("Supported args: '-fm'")
+#     print("Something wrong\nTry run script without args")
+#     sys_exit(1)
 
 try:
     GIT_STATUS = check_git_on_device()
