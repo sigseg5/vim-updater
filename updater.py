@@ -2,7 +2,6 @@
 
 import argparse
 from sys import exit as sys_exit
-# TODO: remove import
 from sys import argv
 from os import path
 from os import mkdir
@@ -21,7 +20,6 @@ UPDATER_VER = "1.1"
 isMakeInstalled = check_make_status()
 
 parser = argparse.ArgumentParser()
-# TODO: add version output
 parser.add_argument("-f", "--fm", help="Force `make` and `make install`", action="store_true")
 parser.add_argument("-c", "--clean", help="Clean updater folder", action="store_true")
 parser.add_argument("-v", "--version", action="version", version="vim updater {}".format(UPDATER_VER))
