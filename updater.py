@@ -17,6 +17,17 @@ from src.Utilities.installer import make_action
 from src.Utilities.installer import check_make_status
 
 UPDATER_VER = "1.1"
+GIT_DOWNLOAD_PAGE = "http://git-scm.com/"
+VIM_DOWNLOAD_PAGE = "https://www.vim.org/download.php#pc"
+VIM_REPO = "https://github.com/vim/vim.git"
+OS_TYPE = check_os()
+
+if OS_TYPE == "win":
+    print("Windows don't fully supported yet")
+    print("Please download vim here: {}".format(VIM_DOWNLOAD_PAGE))
+    openBrowser(GIT_DOWNLOAD_PAGE)
+    sys_exit(0)
+
 isMakeInstalled = check_make_status()
 
 parser = argparse.ArgumentParser()
@@ -25,7 +36,6 @@ parser.add_argument("-c", "--clean", help="Clean updater folder", action="store_
 parser.add_argument("-v", "--version", action="version", version="vim updater {}".format(UPDATER_VER))
 args = parser.parse_args()
 
-OS_TYPE = check_os()
 USER_FOLDER = path.expanduser("~")
 UPDATER_DIR = "/.vim_updater"
 VIM_FOLDER = "/vim"
@@ -49,12 +59,6 @@ else:
 GIT_DOWNLOAD_PAGE = "http://git-scm.com/"
 VIM_DOWNLOAD_PAGE = "https://www.vim.org/download.php#pc"
 VIM_REPO = "https://github.com/vim/vim.git"
-
-if OS_TYPE == "win":
-    print("Windows don't fully supported yet")
-    print("Please download vim here: {}".format(VIM_DOWNLOAD_PAGE))
-    openBrowser(GIT_DOWNLOAD_PAGE)
-    sys_exit(0)
 
 try:
     GIT_STATUS = check_git_on_device()
