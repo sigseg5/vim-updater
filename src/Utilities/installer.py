@@ -3,7 +3,6 @@ from sys import exit as sys_exit
 from subprocess import call
 from subprocess import check_output
 from subprocess import CalledProcessError
-wrong_pass_count = 0
 
 
 def passInput(args):
@@ -12,6 +11,11 @@ def passInput(args):
     try:
         install_proc = call("echo {} | sudo -S {}".format(sudo_pass, install_command), shell=True, cwd=args[1])
     except CalledProcessError:
+        # TODO: fix incorrect sudo pass message
+        # Password:Sorry, try again.
+        # Password:
+        # sudo: no password was provided
+        # sudo: 1 incorrect password attempt
         print("\nWrong password\nRun updater again with '-fm argument'")
         sys_exit(1)
         
