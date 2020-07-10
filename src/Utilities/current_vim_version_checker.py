@@ -4,7 +4,7 @@ from sys import exit as sys_exit
 
 
 def check_current_vim_version_in_system():
-    print("current vim version in system")
+    print("Current vim version in system:")
     command = "vim --version"
     proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     stdout = []

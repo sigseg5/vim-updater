@@ -8,17 +8,10 @@ from subprocess import CalledProcessError
 def passInput(args):
     sudo_pass = getpass.getpass()
     install_command = "sudo make install"
-    try:
-        install_proc = call("echo {} | sudo -S {}".format(sudo_pass, install_command), shell=True, cwd=args[1])
-    except CalledProcessError:
-        # TODO: fix incorrect sudo pass message
-        # Password:Sorry, try again.
-        # Password:
-        # sudo: no password was provided
-        # sudo: 1 incorrect password attempt
-        print("\nWrong password\nRun updater again with '-fm argument'")
-        sys_exit(1)
-        
+
+    install_proc = call("echo {} | sudo -S {}".format(sudo_pass, install_command), shell=True, cwd=args[1])
+
+
 
 def check_make_status():
     make_check_proc = check_output(["make", "--version"])
