@@ -16,7 +16,7 @@ from src.Utilities.git_utilities import check_git_on_device
 from src.Utilities.installer import make_action
 from src.Utilities.installer import check_make_status
 
-UPDATER_VER = "1.1.3"
+UPDATER_VER = "1.1.4"
 GIT_DOWNLOAD_PAGE = "http://git-scm.com/"
 VIM_DOWNLOAD_PAGE = "https://www.vim.org/download.php#pc"
 VIM_REPO = "https://github.com/vim/vim.git"

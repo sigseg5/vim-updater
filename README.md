@@ -25,6 +25,5 @@ Any ideas or trouble? Please open [issue](https://github.com/sigseg5/vim-updater
 or [pull request](https://github.com/sigseg5/vim-updater/pulls) 
 
 ### Communicate
-[twitter](https://twitter.com/kirill_nk)<br>
 [telegram](https://t.me/kirill_nk) or 
 [telegram link](https://tele.click/kirill_nk) for countries with censorship 

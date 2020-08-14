@@ -2,15 +2,18 @@ import getpass
 from sys import exit as sys_exit
 from subprocess import call
 from subprocess import check_output
-from subprocess import CalledProcessError
+from os import environ
 
 
-def passInput(args):
+def pass_input(args):
     sudo_pass = getpass.getpass()
-    install_command = "sudo make install"
-
-    install_proc = call("echo {} | sudo -S {}".format(sudo_pass, install_command), shell=True, cwd=args[1])
-
+    # TODO: Add sudo launch check
+    if not "SUDO_UID" in environ.keys():
+        install_command = "sudo make install"
+        install_proc = call("echo {} | sudo -S {}".format(sudo_pass, install_command), shell=True, cwd=args[1])
+    else:
+        install_command = "sudo make install"
+        install_proc = call(install_command, shell=True, cwd=args[1])
 
 
 def check_make_status():
@@ -32,7 +35,7 @@ def make_action(*args):
     elif len(args) == 2 and args[0] == "install":
 
         print("make install")
-        passInput(args)
+        pass_input(args)
 
     else:
         print("args error")
