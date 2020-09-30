@@ -3,8 +3,8 @@
 
 ### Requirements
 1. macOS/Linux OS (Windows don't supported now)
-2. GIT
-3. Python 3
+2. git
+3. Python 3.x
 4. Xcode and Command Line Tools installed for macOS
 
 ### Usage

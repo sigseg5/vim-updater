@@ -4,6 +4,10 @@ from sys import exit as sys_exit
 
 
 def check_current_vim_version_in_system():
+    """
+    Function what checks current vim version in system
+    :return: String with current version value
+    """
     print("Current vim version in system:")
     command = "vim --version"
     proc = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
@@ -18,6 +22,11 @@ def check_current_vim_version_in_system():
 
 
 def check_current_vim_version_in_src(path_to_vim_folder):
+    """
+    Function what checks current vim version in src folder
+    :param path_to_vim_folder: String path to vim sources folder (typically USER_FOLDER/UPDATER_DIR)
+    :return: String wih current version from src value
+    """
     complete_version = ""
 
     if not path.isdir(path_to_vim_folder):
@@ -37,8 +46,9 @@ def check_current_vim_version_in_src(path_to_vim_folder):
                         major_and_minor_version += line.strip("MINOR = ")
                         first_minor_in_text_flag = True
             complete_version += "VIM - Vi IMproved " + major_and_minor_version
+
     except FileNotFoundError:
-        print("error")
+        print("File not found error, can't check current vim version")
         sys_exit(1)
 
     # check included patches
@@ -54,7 +64,9 @@ def check_current_vim_version_in_src(path_to_vim_folder):
                         first_version_in_file_flag = False
                         included_patches += line
         complete_version += "Included patches: " + included_patches.strip().strip(",")
+
     except FileNotFoundError:
-        print("error")
+        print("File not found error, can't check current vim version")
         sys_exit(1)
+
     return complete_version
