@@ -21,10 +21,7 @@ def check_make_installation_status():
     :return: Boolean status
     """
     make_check_proc = check_output(["make", "--version"])
-    if (make_check_proc.decode('utf-8')).count("GNU Make") == 1:
-        return True
-    else:
-        return False
+    return (make_check_proc.decode('utf-8')).count("GNU Make") == 1
 
 
 def make_action(*args):
