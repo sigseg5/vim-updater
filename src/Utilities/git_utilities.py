@@ -31,4 +31,3 @@ def git_action(*args):
     else:
         print("Trouble with args")
         sys_exit(1)
-    pass
