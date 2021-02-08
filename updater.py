@@ -3,10 +3,8 @@
 import argparse
 from sys import exit as sys_exit
 from sys import argv
-from os import path
-from os import mkdir
+from os import path, mkdir, environ
 from shutil import rmtree
-from os import environ
 
 from src.Utilities.os_checker import check_os
 from src.Utilities.git_downloader_from_internet import open_browser
