@@ -1,5 +1,8 @@
 # vim-updater
-### vim updater is simple script which helps to update to new builds of vim editor 
+### vim updater is simple script which helps to update to new builds of vim editor
+![GitHub repo size](https://img.shields.io/github/repo-size/sigseg5/vim-updater)
+![GitHub last commit](https://img.shields.io/github/last-commit/sigseg5/vim-updater)
+![GitHub Release Date](https://img.shields.io/github/release-date/sigseg5/vim-updater)
 
 ### Requirements
 1. macOS/Linux OS (Windows don't supported now)
