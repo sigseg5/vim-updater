@@ -5,7 +5,6 @@ def open_browser(url):
     """
     Function to open browser
     :param url: String url value
-    :return:
     """
     try:
         open_new_tab(url)

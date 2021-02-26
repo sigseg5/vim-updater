@@ -8,7 +8,6 @@ def pass_input(args):
     """
     Function to parse sudo pass and perform installation with superuser privileges
     :param args:
-    :return:
     """
     sudo_pass = getpass.getpass()
     install_command = "sudo make install"
@@ -28,7 +27,6 @@ def make_action(*args):
     """
     Function to perform all GNU Make related actions (`make distclean` and `make install`)
     :param args: work with `make distclean` and `make install`
-    :return:
     """
     if len(args) == 2 and args[0] == "make":
         print("make diskclean")
