@@ -23,10 +23,14 @@ def git_action(*args):
         if (pull_proc_out.decode('utf-8')).count("Already up-to-date.") == 1 or \
                 (pull_proc_out.decode('utf-8')).count("Already up to date.") == 1:
             return True
+        elif (pull_proc_out.decode('utf-8')).count("fatal: unable for access") != 0:
+            sys_exit(1)
 
     elif len(args) == 3 and args[0] == "clone":
         print("git clone {repo} {path}".format(repo=args[1], path=args[2]))
-        _ = call(["git", "clone", args[1], args[2]])
+        clone_proc_out = check_output(["git", "clone", args[1], args[2]])
+        if (clone_proc_out.decode('utf-8')).count("fatal: unable for access") != 0:
+            sys_exit(1)
 
     else:
         print("Unexpected args error.")
