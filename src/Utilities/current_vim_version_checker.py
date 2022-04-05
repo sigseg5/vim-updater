@@ -48,7 +48,7 @@ def check_current_vim_version_in_src(path_to_vim_folder):
             complete_version += "VIM - Vi IMproved " + major_and_minor_version
 
     except FileNotFoundError:
-        print("File not found error, can't check current vim version")
+        print("File not found error, can't check current vim version.")
         sys_exit(1)
 
     # check included patches
@@ -66,7 +66,7 @@ def check_current_vim_version_in_src(path_to_vim_folder):
         complete_version += "Included patches: " + included_patches.strip().strip(",")
 
     except FileNotFoundError:
-        print("File not found error, can't check current vim version")
+        print("File not found error, can't check current vim version.")
         sys_exit(1)
 
     return complete_version

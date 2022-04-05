@@ -29,9 +29,9 @@ def clean_install():
     Function to perform clean installation of vim: `git clone` and `make install`
     :return:
     """
-    print("Starting git clone, it may not be very fast")
+    print("Starting git clone, it may not be quite fast")
     git_action("clone", VIM_REPO, USER_FOLDER + UPDATER_DIR)
-    print("Current vim version in src\n" + check_current_vim_version_in_src(USER_FOLDER + UPDATER_DIR))
+    print("Current vim version in src:\n" + check_current_vim_version_in_src(USER_FOLDER + UPDATER_DIR))
     make_action("make", USER_FOLDER + UPDATER_DIR)
     make_action("install", USER_FOLDER + UPDATER_DIR)
     print("VIM updated to {}".format(check_current_vim_version_in_system()))
@@ -39,11 +39,11 @@ def clean_install():
 
 def main():
     if "SUDO_UID" in environ.keys():
-        print("Please don't use this application with superuser privileges")
+        print("Please don't use this application with superuser privileges.")
         sys_exit(1)
 
     if OS_TYPE == "win":
-        print("Windows don't fully supported yet")
+        print("Windows is not supported yet.")
         print("Please download vim here: {}".format(VIM_DOWNLOAD_PAGE))
         open_browser(GIT_DOWNLOAD_PAGE)
         sys_exit(0)
@@ -59,36 +59,36 @@ def main():
     if len(argv) == 1:
         pass
     elif args.fm and is_make_installed:
-        print("Trying to force build and install vim")
+        print("Trying to force build and install vim…")
         make_action("make", USER_FOLDER + UPDATER_DIR)
         make_action("install", USER_FOLDER + UPDATER_DIR)
         sys_exit(0)
     elif args.clean:
-        print("Removing work folder")
+        print("Removing work folder…")
         rmtree(USER_FOLDER + UPDATER_DIR)
-        print("Work folder removed successfully, please run updater again")
+        print("Work folder removed successfully, please run updater again.")
         sys_exit(0)
     else:
-        print("Check supported args by `./updater [-h, --help]` command")
-        print("Something wrong\nTry run script without args")
+        print("Check supported args by `./updater [-h, --help]` command.")
+        print("Something wrong\nTry run script without args.")
 
     try:
         git_version_output = check_git_on_device()
     except FileNotFoundError:
-        print("git not installed in system")
+        print("git is not installed on the system.")
         open_browser(GIT_DOWNLOAD_PAGE)
         sys_exit(0)
 
     if str(git_version_output).count("git version") != 1:
-        print("git not found in system")
+        print("git is not found on the system.")
         open_browser(GIT_DOWNLOAD_PAGE)
         sys_exit(0)
 
     if not is_make_installed and OS_TYPE == "mac":
         print("""
         make not found in system
-        Download Xcode from AppStore and run "xcode-select --install" in terminal
-        Or run "brew install make" if you have Homebrew installed
+        Download Xcode from AppStore and run "xcode-select --install" in terminal.
+        Or run "brew install make" if you have Homebrew installed.
         """)
         sys_exit(0)
     elif not is_make_installed:
@@ -124,20 +124,20 @@ def main():
             print(check_current_vim_version_in_src(USER_FOLDER + UPDATER_DIR))
             make_action("make", USER_FOLDER + UPDATER_DIR)
             make_action("install", USER_FOLDER + UPDATER_DIR)
-            print("VIM updated to {}".format(check_current_vim_version_in_system()))
+            print("vim updated to {}".format(check_current_vim_version_in_system()))
 
         else:
             clean_install()
 
     elif path.isdir(USER_FOLDER) and not path.exists(USER_FOLDER + UPDATER_DIR):
-        print("Can't find work folder")
-        print("Trying to create updater directory")
+        print("Can't find work folder.")
+        print("Trying to create updater directory…")
         try:
             mkdir(USER_FOLDER + UPDATER_DIR)
-            print("Directory {user_folder}{updater_dir} successfully created".format(user_folder=USER_FOLDER,
+            print("Directory {user_folder}{updater_dir} successfully created.".format(user_folder=USER_FOLDER,
                                                                                      updater_dir=UPDATER_DIR))
         except FileExistsError:
-            print("Directory {user_folder}{updater_dir} already exists".format(user_folder=USER_FOLDER,
+            print("Directory {user_folder}{updater_dir} already exists.".format(user_folder=USER_FOLDER,
                                                                                updater_dir=UPDATER_DIR))
             sys_exit(1)
 

@@ -29,16 +29,16 @@ def make_action(*args):
     :param args: work with `make distclean` and `make install`
     """
     if len(args) == 2 and args[0] == "make":
-        print("make diskclean")
+        print("Performing make diskclean…")
 
         make_command = "make"
         _ = call([make_command, "distclean"], cwd=args[1])
         _ = call([make_command], cwd=args[1])
 
     elif len(args) == 2 and args[0] == "install":
-        print("Performing Make install")
+        print("Performing Make install…")
         pass_input(args)
 
     else:
-        print("Unexpected args error")
+        print("Unexpected args error.")
         sys_exit(1)

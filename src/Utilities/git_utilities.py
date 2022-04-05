@@ -29,5 +29,5 @@ def git_action(*args):
         _ = call(["git", "clone", args[1], args[2]])
 
     else:
-        print("Trouble with args")
+        print("Unexpected args error.")
         sys_exit(1)
